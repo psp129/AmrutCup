@@ -58,16 +58,6 @@ app.post('/create-user', async (req, res) => {
     }
   
     try {
-      // const id = crypto.randomUUID();
-      // const gameRef = db.ref(`Games/${id}`);
-      // await gameRef.set({
-      //   //id: id,
-      //   courtNum,
-      //   teamA,
-      //   teamB,
-      //   scoreA,
-      //   scoreB
-      // });
 
       await db.ref(`Courts/Court${courtNum}`).update({
         team1: teamA,
