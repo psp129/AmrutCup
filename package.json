@@ -2,8 +2,9 @@
   "name": "amrut-cup",
   "version": "1.0.0",
   "description": "Tournament Tracker personalized for Amrut Cup (Volleyball Tournament) with interactive features and real time updates.",
-  "main": "node js/server.js",
+  "main": "js/server.js",
   "scripts": {
+    "start": "node js/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/psp129/AmrutCup/issues"
   },
-  "homepage": "https://github.com/psp129/AmrutCup#readme"
+  "homepage": "https://github.com/psp129/AmrutCup#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "firebase-admin": "^11.10.1"
+  }
 }
