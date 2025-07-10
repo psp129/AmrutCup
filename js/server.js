@@ -3,7 +3,7 @@ const cors = require('cors');
 const admin = require('firebase-admin');
 const crypto = require('crypto');
 
-const serviceAccount = require('./serviceAccountKey.json');
+const serviceAccount = require('../serviceAccountKey.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -77,3 +77,8 @@ app.post('/create-user', async (req, res) => {
   app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
   });
+
+  app.get('/', (req, res) => {
+    res.send('Backend is live!');
+  });
+  
