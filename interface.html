@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Sample Website</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="bracket.css">
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    /* NAVIGATION */
+    nav {
+      background-color: #230b8d;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      background-color: #092747;
+      color: white;
+      padding: 60px 30px;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    /* CONTENT SECTION */
+    .content {
+      padding: 40px 30px;
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-top: -30px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #d2c810;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #5ed117;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <h1>Amrut Cup</h1>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="profile.html">Profile</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30285/WebImages/Amrut_Cup_2024_74.jpg"  alt="Banner Image" style="width: 100%; height: auto;" />
+    
+    <h2>Kishori-Yuvati Amrut Cup</h2>
+    <p>June 7-8, 2025</p>
+  </div>
+
+  <!-- CONTENT
+  <div class="content" style="text-align: center;">
+    <h3></h3>
+    
+  </div> -->
+
+  <div>
+    <li class="spacer">&nbsp;</li>
+    <h1>2025 Amrut Cup - Regular Season Bracket</h1>
+<main id="tournament">
+  <ul class="round round-1">
+    <li class="spacer">&nbsp;</li>
+    
+    <li class="game game-top winner">Team 1 <span>Score</span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom ">Team 2 <span>Score</span></li>
+
+    <li class="spacer">&nbsp;</li>
+    
+    <li class="game game-top winner">Team 3 <span>Score</span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom ">Team 4 <span>Score</span></li>
+
+    <li class="spacer">&nbsp;</li>
+    
+    <li class="game game-top ">Team 5 <span>Score</span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom winner">Team 6 <span>Score</span></li>
+
+    <li class="spacer">&nbsp;</li>
+    
+    <li class="game game-top winner">Team 7 <span>Score</span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom ">Team 8 <span>Score</span></li>
+
+    <li class="spacer">&nbsp;</li>
+    
+    <li class="game game-top winner">Team 9 <span>Score</span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom ">Team 10 <span>Score</span></li>
+
+    <li class="spacer">&nbsp;</li>
+    
+    <li class="game game-top winner">Team 11 <span>Score</span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom ">Team 12 <span>Score</span></li>
+
+    <li class="spacer">&nbsp;</li>
+    
+    <li class="game game-top winner">Team 13 <span>Score</span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom ">Team 14 <span>Score</span></li>
+
+    <li class="spacer">&nbsp;</li>
+    
+    <li class="game game-top winner">Team 15 <span>Score</span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom ">Team 16  <span>Score</span></li>
+
+    <li class="spacer">&nbsp;</li>
+  </ul>
+  <ul class="round round-2">
+    <li class="spacer">&nbsp;</li>
+    
+    <li class="game game-top winner">Game 1 Winner <span>Score</span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom ">Game 2 Winner <span>Score</span></li>
+
+    <li class="spacer">&nbsp;</li>
+    
+    <li class="game game-top winner">Game 3 Winner <span>Score</span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom ">Game 4 Winner <span>Score</span></li>
+
+    <li class="spacer">&nbsp;</li>
+    
+    <li class="game game-top ">Game 5 Winner <span>Score</span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom winner">Game 6 Winner <span>Score</span></li>
+
+    <li class="spacer">&nbsp;</li>
+    
+    <li class="game game-top ">Game 7 Winner <span>Score</span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom winner">Game 8 Winner <span>Score</span></li>
+
+    <li class="spacer">&nbsp;</li>
+  </ul>
+  <ul class="round round-3">
+    <li class="spacer">&nbsp;</li>
+    
+    <li class="game game-top winner">Game 1 R2 Winner <span>Score</span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom ">Game 2 R2 Winner <span>Score</span></li>
+
+    <li class="spacer">&nbsp;</li>
+    
+    <li class="game game-top ">Game 3 R2 Winner <span>Score</span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom winner">Game 4 R2 Winner <span>Score</span></li>
+
+    <li class="spacer">&nbsp;</li>
+  </ul>
+  <ul class="round round-4">
+    <li class="spacer">&nbsp;</li>
+    
+    <li class="game game-top winner">R3 Winner 1 <span>Score</span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom ">R3 Winner 2 <span>Score</span></li>
+    
+    <li class="spacer">&nbsp;</li>
+  </ul>   
+</main>
+  </div>
+
+</body>
+</html>

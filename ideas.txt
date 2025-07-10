@@ -1,0 +1,6 @@
+Features:
+
+- Bookeepers: Constantly update the score
+--> have the score dynamically changing in the games page
+
+- List games by the court they are on with the team names and scores

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Sample Website</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    /* NAVIGATION */
+    nav {
+      background-color: #230b8d;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      background-color: #092747;
+      color: white;
+      padding: 60px 30px;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    /* CONTENT SECTION */
+    .content {
+      padding: 40px 30px;
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-top: -30px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #d2c810;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #5ed117;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <h1>Amrut Cup</h1>
+    <ul>
+      <li><a href="interface.html">Home</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="profile.html">Profile</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h2>Bookkeeper Login</h2>
+    <p>Please login using your BKMS login credentials</p>
+    <input type="text" id="bkmsid" placeholder="BKMS ID" />
+    <input type="password" id="password" placeholder="Password" />
+    
+    <button onclick="login()">Login</button>
+
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
+
+<script>
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyACxsbxzBQ_Wk6diSeU2ejMPZu2ajgQWaI",
+  authDomain: "amrutcup-f7225.firebaseapp.com",
+  databaseURL: "https://amrutcup-f7225-default-rtdb.firebaseio.com",
+  projectId: "amrutcup-f7225",
+  storageBucket: "amrutcup-f7225.firebasestorage.app",
+  messagingSenderId: "540970777934",
+  appId: "1:540970777934:web:19699b90ff40aa2fedf21f",
+  measurementId: "G-DJPX5SH2EH"
+  };
+
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  
+  async function login(){
+    const bkmsid = document.getElementById('bkmsid').value.trim();
+    const password = document.getElementById('password').value.trim();
+    
+    if (!bkmsid || !password) {
+      alert('Please enter both BKMS ID and password.');
+      return;
+    }
+
+    try {
+      const snapshot = await firebase.database().ref(`Bookkeepers/${bkmsid}`).once('value');
+
+      if (!snapshot.exists()) {
+        alert('No user found with this BKMS ID.');
+        return;
+      }
+
+      const userData = snapshot.val();
+
+      if (userData.password === password) {
+        alert('Login successful!');
+        // Store user info locally (optional)
+        localStorage.setItem('bkmsid', bkmsid);
+        // Redirect
+        window.location.href = "bookkeeper.html"; // bookkeeper dashboard
+      } else {
+        alert('Incorrect password.');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('An error occurred while logging in.');
+    }
+  }
+
+  </script>
+
+</body>
+</html>
