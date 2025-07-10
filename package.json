@@ -1,0 +1,20 @@
+{
+  "name": "amrut-cup",
+  "version": "1.0.0",
+  "description": "Tournament Tracker personalized for Amrut Cup (Volleyball Tournament) with interactive features and real time updates.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psp129/AmrutCup.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/psp129/AmrutCup/issues"
+  },
+  "homepage": "https://github.com/psp129/AmrutCup#readme"
+}
