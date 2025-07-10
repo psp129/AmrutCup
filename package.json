@@ -2,7 +2,7 @@
   "name": "amrut-cup",
   "version": "1.0.0",
   "description": "Tournament Tracker personalized for Amrut Cup (Volleyball Tournament) with interactive features and real time updates.",
-  "main": "server.js",
+  "main": "node js/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
