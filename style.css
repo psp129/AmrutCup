@@ -159,3 +159,34 @@ body {
   padding: 6px 0;
   border-bottom: 1px solid #ccc;
 }
+
+h1 {
+  margin-bottom: 0px; /* 20px space below */
+}
+
+button {
+  padding: 15px 30px; /* 15px top/bottom, 30px left/right */
+}
+
+.hero h1 {
+  margin-bottom: 15px;
+}
+
+.hero p {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.hero-images {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* space between images */
+  margin-bottom: 20px; /* space below images */
+}
+
+.hero-images img {
+  width: 150px; /* control size */
+  height: auto;
+  border-radius: 8px; /* optional rounded corners */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}

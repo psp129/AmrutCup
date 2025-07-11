@@ -104,16 +104,29 @@ async function assignInitialMatchesToCourts() {
 }
 
 
-
-
 function setupCourtRotation() {
   for (let i = 1; i <= 6; i++) {
-    const courtRef = firebase.database().ref(`Courts/Court${i}`);
+    const courtRef = db.ref(`Courts/Court${i}`);
 
     courtRef.on("child_changed", async (snapshot) => {
       if (snapshot.key === "finished" && snapshot.val() === true) {
-        let group = i <= 4 ? "K1" : "K2";
-        const queueRef = firebase.database().ref(`ScheduledMatches/${group}`);
+        const courtNum = i;
+        const courtDataSnapshot = await courtRef.once("value");
+        const finishedMatch = courtDataSnapshot.val();
+
+        // ✅ Archive the finished match
+        const historyRef = db.ref(`MatchHistory/Court${courtNum}`).push();
+        await historyRef.set({
+          team1: finishedMatch.team1,
+          team2: finishedMatch.team2,
+          score1: finishedMatch.score1,
+          score2: finishedMatch.score2,
+          timestamp: Date.now()
+        });
+
+        // 🔄 Load next match
+        let group = courtNum <= 4 ? "K1" : "K2";
+        const queueRef = db.ref(`ScheduledMatches/${group}`);
         const queueSnapshot = await queueRef.once("value");
         const queue = queueSnapshot.val();
 
@@ -133,6 +146,7 @@ function setupCourtRotation() {
     });
   }
 }
+
 
 
 function listenToCourts() {
@@ -191,9 +205,152 @@ async function leaderboard(group, leaderboardElementId){
   
 }
 
+async function loadGames() {
+  const courtsRef = db.ref("Courts");
+  const snapshot = await courtsRef.once("value");
+  const games = snapshot.val();
+
+  Object.entries(games).forEach(([courtKey, game], index) => {
+    const courtNum = courtKey.replace("Court", "");
+
+    const card = document.createElement('div');
+    card.classList.add('game-card');
+    card.dataset.court = courtNum;
+
+    card.innerHTML = `
+      <h3>${courtKey}: ${game.team1 || "TBD"} vs ${game.team2 || "TBD"}</h3>
+      <p>Likes: <span class="like-count">${game.likes || 0}</span></p>
+      <button class="like-button">❤️ Like</button>
+    `;
+
+    document.body.appendChild(card);
+
+    const chatBox = createChatForCourt(courtNum);
+    card.appendChild(chatBox);
+
+    // Setup chat listeners and handlers
+    listenToChat(courtNum);
+    setupSendHandler(courtNum);
+  });
+
+  // Re-bind like button handler after rendering
+  bindLikeButtons();
+}
+
+
+function createChatForCourt(courtNum) {
+  const chatBox = document.createElement('div');
+  chatBox.classList.add('chat-box');
+
+  chatBox.innerHTML = `
+    <div class="messages" id="messages-${courtNum}"></div>
+    <input type="text" id="input-${courtNum}" placeholder="Show your samp, suhradhbhav, and ekta..."/>
+    <button id="send-${courtNum}">Send</button>
+  `;
+
+  return chatBox;
+}
+
+function listenToChat(courtNum) {
+  const messagesDiv = document.querySelector(`#Court${courtNum} .messages`);
+  const messagesRef = db.ref(`Courts/Court${courtNum}/messages`);
+
+  if (!messagesDiv) {
+    console.warn(`No messages div found for Court${courtNum}`);
+    return;
+  }
+
+  messagesRef.on('value', snapshot => {
+    messagesDiv.innerHTML = ''; // clear old messages
+    const messages = snapshot.val();
+    if (messages) {
+      Object.values(messages).forEach(msg => {
+        const p = document.createElement('p');
+        p.textContent = `${msg.user || 'Anon'}: ${msg.text}`;
+        messagesDiv.appendChild(p);
+      });
+    }
+  });
+}
+
+
+function setupSendHandler(courtNum) {
+  const input = document.querySelector(`#Court${courtNum} .chat-input`);
+  const sendBtn = document.querySelector(`#Court${courtNum} .send-btn`);
+
+  sendBtn.addEventListener('click', () => {
+    const text = input.value.trim();
+    if (!text) return;
+
+    const messageRef = db.ref(`Courts/Court${courtNum}/messages`);
+    messageRef.push({
+      user: 'Anonymous',
+      text,
+      timestamp: Date.now()
+    }).then(() => {
+      console.log(`Message sent to Court${courtNum}:`, text);
+      input.value = '';
+    }).catch(err => {
+      console.error("Failed to send message:", err);
+    });
+  });
+}
+
+function bindLikeButtons() {
+  document.querySelectorAll('.court-box').forEach(box => {
+    const button = box.querySelector('.like-button');
+    const likeCountSpan = box.querySelector('.like-count');
+    const heading = box.querySelector('h2');
+    const match = heading.textContent.match(/Court (\d+)/);
+    if (!match) return;
+
+    const courtNum = match[1];
+
+    button.addEventListener('click', async () => {
+      const courtRef = db.ref(`Courts/Court${courtNum}`);
+
+      courtRef.transaction(currentData => {
+        if (currentData) {
+          currentData.likes = (currentData.likes || 0) + 1;
+        }
+        return currentData;
+      }, (error, committed, snapshot) => {
+        if (error) {
+          console.error(`Like failed for Court${courtNum}:`, error);
+        } else if (!committed) {
+          console.warn(`Like not committed for Court${courtNum}`);
+        } else {
+          console.log(`Liked Court${courtNum}`);
+          likeCountSpan.textContent = parseInt(likeCountSpan.textContent) + 1;
+        }
+      });
+    });
+  });
+}
  
-assignInitialMatchesToCourts();
-setupCourtRotation();
-listenToCourts();
-leaderboard("K1", "leaderboard-k1");
-leaderboard("K2", "leaderboard-k2");
+// assignInitialMatchesToCourts();
+// setupCourtRotation();
+// listenToCourts();
+// leaderboard("K1", "leaderboard-k1");
+// leaderboard("K2", "leaderboard-k2");
+//loadGames();
+
+window.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM fully loaded");
+
+  assignInitialMatchesToCourts()
+    .then(() => {
+      console.log("Matches assigned");
+      setupCourtRotation();
+      listenToCourts();
+      leaderboard("K1", "leaderboard-k1");
+      leaderboard("K2", "leaderboard-k2");
+      bindLikeButtons();
+
+      for (let i = 1; i <= 6; i++) {
+        listenToChat(i);
+        setupSendHandler(i);
+      }
+    })
+    .catch(err => console.error("Setup failed:", err));
+});

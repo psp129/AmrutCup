@@ -114,12 +114,22 @@
   </nav>
 
   <!-- HERO -->
-  <div class="hero">
-    <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30285/WebImages/Amrut_Cup_2024_74.jpg"  alt="Banner Image" style="width: 100%; height: auto;" />
-    
-    <h2>Kishori-Yuvati Amrut Cup</h2>
-    <p>June 7-8, 2025</p>
+  <div class="hero" style="position: relative;">
+    <h1>Kishori-Yuvati Amrut Cup</h1>
+    <p> </p>
+    <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30285/WebImages/Amrut_Cup_2024_74.jpg" alt="Image 1" />
+    <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33366/WebImages/Robbinsville_Amrutcup2025_098.jpg" alt="Image 2" />
+    <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33366/WebImages/Robbinsville_Amrutcup2025_077.jpg" alt="Image 3" />
+    <p>June 8-9, 2026</p>
+    <p> </p>
+    <h2>SAMP! SUHRADHBHAV! EKTA!</h2>
+    <p> </p>
+    <h3>Strengthen bonds with one another and our gurus!</h3>
+    <p> </p>
+    <button onclick="location.href='games.html'">View Courts and Games</button>
+    <p id="countdown"></p>
   </div>
+  
 
   <!-- CONTENT
   <div class="content" style="text-align: center;">
@@ -128,7 +138,7 @@
   </div> -->
 
   <div>
-    <li class="spacer">&nbsp;</li>
+   <!-- <li class="spacer">&nbsp;</li>
     <h1>2025 Amrut Cup - Regular Season Bracket</h1>
 <main id="tournament">
   <ul class="round round-1">
@@ -232,9 +242,36 @@
     <li class="game game-bottom ">R3 Winner 2 <span>Score</span></li>
     
     <li class="spacer">&nbsp;</li>
-  </ul>   
+  </ul> -->  
 </main>
   </div>
 
+  <p id="countdown"></p>
+  <script>
+    const eventDate = new Date("June 7, 2026 00:00:00").getTime();
+    const countdownEl = document.getElementById("countdown");
+  
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+  
+      if (distance < 0) {
+        countdownEl.innerHTML = "The event is live!";
+        clearInterval(interval);
+        return;
+      }
+  
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / 1000 / 60) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+  
+      countdownEl.innerHTML = `Starts in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+  
+    const interval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+  
 </body>
 </html>

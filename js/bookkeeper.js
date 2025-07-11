@@ -1,5 +1,5 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyACxsbxzBQ_Wk6diSeU2ejMPZu2ajgQWaI",
+  apiKey: "AIzaSyACxsbxzBQ_Wk6diSeU2ejMPZu2ajgQWaI",
   authDomain: "amrutcup-f7225.firebaseapp.com",
   databaseURL: "https://amrutcup-f7225-default-rtdb.firebaseio.com",
   projectId: "amrutcup-f7225",
@@ -14,8 +14,6 @@ const firebaseConfig = {
   const db = firebase.database();
   
   async function record(event){
-  //   document.getElementById('score-form').addEventListener('submit', function (e) {
-  // e.preventDefault();
 
   event.preventDefault();
   
@@ -24,11 +22,6 @@ const firebaseConfig = {
   const teamB = document.getElementById('teamB').value.trim();
   const scoreA = document.getElementById('scoreA').value;
   const scoreB = document.getElementById('scoreB').value;
-
-  // const gameEntry = document.createElement('li');
-  // gameEntry.textContent = `${teamA} (${scoreA}) vs ${teamB} (${scoreB})`;
-
-  // document.getElementById('game-list').appendChild(gameEntry);
 
   if (!courtNum || !teamA || !teamB || !scoreA || !scoreB) {
     alert('Please complete all fields and select at least one class.');
@@ -58,8 +51,6 @@ const firebaseConfig = {
 
       if(newGame.ok){
         console.log('Game has been saved via API:', result);
-       // localStorage.setItem('userProfile', JSON.stringify(profile));
-        //localStorage.setItem('netID', netID);
         alert('Game recorded via API');
       } else {
         throw new Error(result.error || 'UNKOWN ERROR');
@@ -68,6 +59,4 @@ const firebaseConfig = {
       console.error('Error saving the game:', error);
       alert('Failed to save game via API');
     }
-
-    // });
 }

@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-
     * {
       margin: 0;
       padding: 0;
@@ -17,12 +16,10 @@
     }
 
     body {
-      margin: 0;
       font-family: 'Quicksand', sans-serif;
       background-color: #f2f2f2;
     }
 
-    /* NAVIGATION */
     nav {
       background-color: #230b8d;
       color: white;
@@ -33,14 +30,11 @@
     }
 
     nav h1 {
-      margin: 0;
       font-size: 24px;
     }
 
     nav ul {
       list-style: none;
-      margin: 0;
-      padding: 0;
       display: flex;
     }
 
@@ -54,58 +48,69 @@
       font-weight: bold;
     }
 
-    /* HERO SECTION */
-    .hero {
-      background-color: #092747;
-      color: white;
-      padding: 60px 30px;
-      text-align: center;
+    .court-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 30px;
     }
 
-    .hero h2 {
-      font-size: 36px;
+    .court-box {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
-    .hero p {
-      font-size: 18px;
+    .like-section {
       margin-top: 10px;
     }
 
-    /* CONTENT SECTION */
-    .content {
-      padding: 40px 30px;
-      max-width: 600px;
-      margin: 0 auto;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      margin-top: -30px;
+    .chat-box {
+      margin-top: 15px;
     }
 
-    input, button {
+    .messages {
+      background: #eee;
+      height: 100px;
+      overflow-y: auto;
+      padding: 5px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    input.chat-input {
       width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      font-size: 16px;
+      padding: 8px;
+      margin-bottom: 5px;
     }
 
-    button {
+    button.send-btn, button.like-button {
+      width: 100%;
+      padding: 10px;
       background-color: #d2c810;
       color: white;
       border: none;
+      border-radius: 4px;
       cursor: pointer;
     }
 
-    button:hover {
+    button.send-btn:hover, button.like-button:hover {
       background-color: #5ed117;
+    }
+
+    .leaderboard-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 0 30px 40px 30px;
+    }
+
+    .leaderboard-box .court-box {
+      flex: 1;
     }
   </style>
 </head>
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Bracket plugin CSS & JS -->
-<link rel="stylesheet" href="https://www.aropupu.fi/bracket/jquery-bracket/dist/jquery.bracket.min.css">
-<script src="https://www.aropupu.fi/bracket/jquery-bracket/dist/jquery.bracket.min.js"></script>
 
 <body>
 
@@ -120,51 +125,111 @@
   </nav>
 
   <div class="court-grid">
-    <div class="court-box">
+    <!-- Court Boxes -->
+    <!-- Court 1 to Court 6 with unique IDs for JS to target -->
+    <!-- Format: outer div has id="CourtX" -->
+
+    <div class="court-box" id="Court1">
       <h2>Court 1 (K1)</h2>
       <p id="Court1-team1">Team A</p> vs <p id="Court1-team2">Team B</p>
+      <div class="like-section">
+        <button class="like-button">❤️ Like</button>
+        <span class="like-count">0</span> Likes
+      </div>
+      <div class="chat-box">
+        <div class="messages"></div>
+        <input type="text" class="chat-input" placeholder="Show your samp, suhradhbhav, and ekta.."/>
+        <button class="send-btn">Send</button>
+      </div>
     </div>
-    <div class="court-box">
+
+    <div class="court-box" id="Court2">
       <h2>Court 2 (K1)</h2>
       <p id="Court2-team1">Team A</p> vs <p id="Court2-team2">Team B</p>
+      <div class="like-section">
+        <button class="like-button">❤️ Like</button>
+        <span class="like-count">0</span> Likes
+      </div>
+      <div class="chat-box">
+        <div class="messages"></div>
+        <input type="text" class="chat-input" placeholder="Show your samp, suhradhbhav, and ekta.."/>
+        <button class="send-btn">Send</button>
+      </div>
     </div>
-    <div class="court-box">
+
+    <div class="court-box" id="Court3">
       <h2>Court 3 (K1)</h2>
       <p id="Court3-team1">Team A</p> vs <p id="Court3-team2">Team B</p>
+      <div class="like-section">
+        <button class="like-button">❤️ Like</button>
+        <span class="like-count">0</span> Likes
+      </div>
+      <div class="chat-box">
+        <div class="messages"></div>
+        <input type="text" class="chat-input" placeholder="Show your samp, suhradhbhav, and ekta.."/>
+        <button class="send-btn">Send</button>
+      </div>
     </div>
-    <div class="court-box">
+
+    <div class="court-box" id="Court4">
       <h2>Court 4 (K1)</h2>
       <p id="Court4-team1">Team A</p> vs <p id="Court4-team2">Team B</p>
+      <div class="like-section">
+        <button class="like-button">❤️ Like</button>
+        <span class="like-count">0</span> Likes
+      </div>
+      <div class="chat-box">
+        <div class="messages"></div>
+        <input type="text" class="chat-input" placeholder="Say something encouraging..."/>
+        <button class="send-btn">Send</button>
+      </div>
     </div>
-    <div class="court-box">
+
+    <div class="court-box" id="Court5">
       <h2>Court 5 (K2)</h2>
       <p id="Court5-team1">Team A</p> vs <p id="Court5-team2">Team B</p>
+      <div class="like-section">
+        <button class="like-button">❤️ Like</button>
+        <span class="like-count">0</span> Likes
+      </div>
+      <div class="chat-box">
+        <div class="messages"></div>
+        <input type="text" class="chat-input" placeholder="Show your samp, suhradhbhav, and ekta.."/>
+        <button class="send-btn">Send</button>
+      </div>
     </div>
-    <div class="court-box">
+
+    <div class="court-box" id="Court6">
       <h2>Court 6 (K2)</h2>
       <p id="Court6-team1">Team A</p> vs <p id="Court6-team2">Team B</p>
+      <div class="like-section">
+        <button class="like-button">❤️ Like</button>
+        <span class="like-count">0</span> Likes
+      </div>
+      <div class="chat-box">
+        <div class="messages"></div>
+        <input type="text" class="chat-input" placeholder="Show your samp, suhradhbhav, and ekta.."/>
+        <button class="send-btn">Send</button>
+      </div>
     </div>
   </div>
-  
+
+  <!-- Leaderboards -->
   <div class="leaderboard-box">
-   <div class="court-box">
-    <h2>K1 Leaderboard</h2>
-    <ul id="leaderboard-k1"></ul>
-   </div>
-   
+    <div class="court-box">
+      <h2>K1 Leaderboard</h2>
+      <ul id="leaderboard-k1"></ul>
+    </div>
+
     <div class="court-box">
       <h2>K2 Leaderboard</h2>
       <ul id="leaderboard-k2"></ul>
     </div>
   </div>
 
-  
-  
-
+  <!-- Firebase & Scripts -->
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
-
-  <script src="js/games.js"> </script>
-
+  <script src="js/games.js"></script>
 </body>
 </html>

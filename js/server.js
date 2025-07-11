@@ -3,9 +3,9 @@ const cors = require('cors');
 const admin = require('firebase-admin');
 const crypto = require('crypto');
 
-//const serviceAccount = require('../serviceAccountKey.json');
+const serviceAccount = require('../serviceAccountKey.json');
 
-const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+//const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -75,6 +75,49 @@ app.post('/create-user', async (req, res) => {
       res.status(500).json({error: 'Failed to save game'});
     }
   });
+
+  app.post('/like-game', async (req, res) => {
+    const { courtNum } = req.body;
+  
+    if (!courtNum) {
+      return res.status(400).json({ error: 'Missing court number' });
+    }
+  
+    try {
+      const courtRef = db.ref(`Courts/Court${courtNum}/likes`);
+  
+      // Increment the current like count atomically
+      await courtRef.transaction(currentLikes => {
+        return (currentLikes || 0) + 1;
+      });
+  
+      res.status(200).json({ message: 'Like added!' });
+    } catch (err) {
+      console.error('Error liking game:', err);
+      res.status(500).json({ error: 'Failed to like game' });
+    }
+  });
+
+  app.get('/games', async (req, res) => {
+    try {
+      const courtsSnapshot = await db.ref('Courts').once('value');
+      const courts = courtsSnapshot.val() || {};
+      
+      const games = Object.keys(courts).map(courtKey => ({
+        court: courtKey,
+        team1: courts[courtKey].team1 || "TBD",
+        team2: courts[courtKey].team2 || "TBD",
+        likes: courts[courtKey].likes || 0
+      }));
+  
+      res.json(games);
+    } catch (err) {
+      console.error('Error fetching games:', err);
+      res.status(500).json({ error: 'Failed to fetch games' });
+    }
+  });
+  
+  
 
   app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
