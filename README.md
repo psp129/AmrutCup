@@ -1,11 +1,9 @@
 # AmrutCup
 
 Prachi Patel
-Robbinsville
-7810
 
 About The Project:
-Tournament Tracker personalized for Amrut Cup (Volleyball Tournament) with interactive features and real time updates.
+Tournament Tracker personalized for Amrut Cup (Volleyball Tournament) with interactive features and real time updates. 
 
 Built With:
 Node.js
