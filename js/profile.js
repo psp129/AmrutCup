@@ -36,7 +36,9 @@ const firebaseConfig = {
 
     // api POST to firebase database + testing using API to see if the route works
   try {
-      const newProfile = await fetch("http://localhost:3000/create-user", {
+      //const newProfile = await fetch("http://localhost:3000/create-user", {
+        const backend = 'https://amrutcup.onrender.com'
+        const newProfile = await fetch(`${backend}/create-user`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

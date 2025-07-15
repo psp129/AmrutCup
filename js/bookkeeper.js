@@ -39,7 +39,9 @@ const firebaseConfig = {
   };
 
   try {
-      const newGame = await fetch("http://localhost:3000/save-game", {
+      const backend = 'https://amrutcup.onrender.com'
+      //const newGame = await fetch("http://localhost:3000/save-game", {
+        const newGame = await fetch(`${backend}/save-game`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
