@@ -34,7 +34,6 @@ const firebaseConfig = {
 
       if (userData.password === password) {
         alert('Login successful!');
-        // Store user info locally (optional)
         localStorage.setItem('bkmsid', bkmsid);
         // Redirect
         window.location.href = "adminDash.html"; // admin dashboard

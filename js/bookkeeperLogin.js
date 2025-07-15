@@ -1,4 +1,3 @@
-// ✅ Firebase configuration (your own project credentials)
 const firebaseConfig = {
   apiKey: "AIzaSyACxsbxzBQ_Wk6diSeU2ejMPZu2ajgQWaI",
   authDomain: "amrutcup-f7225.firebaseapp.com",
@@ -10,7 +9,7 @@ const firebaseConfig = {
   measurementId: "G-DJPX5SH2EH"
 };
 
-// ✅ Must initialize Firebase before using it
+// must initialize Firebase before using it
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
@@ -35,7 +34,6 @@ async function login(){
 
       if (userData.password === password) {
         alert('Login successful!');
-        // Store user info locally (optional)
         localStorage.setItem('bkmsid', bkmsid);
         // Redirect
         window.location.href = "bookkeeper.html"; // bookkeeper dashboard

@@ -1,5 +1,5 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyACxsbxzBQ_Wk6diSeU2ejMPZu2ajgQWaI",
+  apiKey: "AIzaSyACxsbxzBQ_Wk6diSeU2ejMPZu2ajgQWaI",
   authDomain: "amrutcup-f7225.firebaseapp.com",
   databaseURL: "https://amrutcup-f7225-default-rtdb.firebaseio.com",
   projectId: "amrutcup-f7225",

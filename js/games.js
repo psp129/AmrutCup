@@ -18,7 +18,7 @@ const firebaseConfig = {
   const groupedTeams = { K1: [], K2: [] };
 
   snapshot.forEach(groupSnap => {
-    const groupKey = groupSnap.key; // should be 'K1' or 'K2'
+    const groupKey = groupSnap.key;
     groupSnap.forEach(teamSnap => {
       const teamData = teamSnap.val();
       if (teamData.name && groupedTeams[groupKey]) {
@@ -114,7 +114,7 @@ function setupCourtRotation() {
         const courtDataSnapshot = await courtRef.once("value");
         const finishedMatch = courtDataSnapshot.val();
 
-        // ✅ Archive the finished match
+        // Archive the finished match
         const historyRef = db.ref(`MatchHistory/Court${courtNum}`).push();
         await historyRef.set({
           team1: finishedMatch.team1,
@@ -124,7 +124,7 @@ function setupCourtRotation() {
           timestamp: Date.now()
         });
 
-        // 🔄 Load next match
+        // Load next match
         let group = courtNum <= 4 ? "K1" : "K2";
         const queueRef = db.ref(`ScheduledMatches/${group}`);
         const queueSnapshot = await queueRef.once("value");
