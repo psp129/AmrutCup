@@ -4,7 +4,7 @@ const admin = require('firebase-admin');
 const crypto = require('crypto');
 
 //const serviceAccount = require('../serviceAccountKey.json');
-
+//const serviceAccount = require('./serviceAccountKey.json');
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
 admin.initializeApp({
@@ -14,6 +14,8 @@ admin.initializeApp({
 
 const app = express();
 const PORT = 3000;
+
+app.use(express.static('public'));
 
 app.use(express.json());
 //app.use(cors());
